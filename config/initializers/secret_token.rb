@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Fakebook::Application.config.secret_token = 'b99a962cff8029a33ddd61abf14bf59ac17e9e14084e21ee14f5c03fdc5f6ca58004ef444a1bf37feb3133dc1a2277384ccf618c741e587a1995492f43b81347'
+Facebook::Application.config.secret_token = 'fdc6ab227a9464dd3db6f8f4478e21172368f000022d9b80f7136bbb969e99c593dd4cef61676a68765ea1bd238b775ad11f62b7a07a62ea4912467e1402475c'

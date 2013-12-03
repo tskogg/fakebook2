@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Fakebook::Application.load_tasks
+Facebook::Application.load_tasks
