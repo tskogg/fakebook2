@@ -5,7 +5,6 @@ tmp/
 .sass-cache/
 
 # Ignore other unneeded files.
-database.yml
 doc/
 *.swp
 *~
