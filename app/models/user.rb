@@ -14,4 +14,7 @@ class User < ActiveRecord::Base
     has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "50x50>" }, :default_url => "avatar/missing.jpg"
     has_many :comments
     acts_as_liker
+    def last_name
+      self.name.blank? ? "" : self.name.split(" ")[1]
+    end
 end
