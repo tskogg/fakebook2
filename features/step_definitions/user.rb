@@ -14,5 +14,5 @@ Then /^I should see (.*)$/ do |name|
   #name = name.to_s
   #page.should have_content "name"
   #expect(page).to have_content(name)
-  pending
+  page.has_content?(name)
 end
