@@ -6,6 +6,8 @@
 <%= image_tag @user.avatar.url(:thumb), class: 'profile' %>
 <span class="left">
 <h4><%= @user.name %></h4>
+<h5><%= "Interests: " %></h5><%= @user.interests %> 
+<h5><%= "Quotes: " %></h5><%= @user.quotes %>
 </span>
 <div class="row feed ">
 <% @activities.each do |activity| %>
