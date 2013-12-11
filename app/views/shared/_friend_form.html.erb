@@ -1,0 +1,17 @@
+<% if current_user!= user %>
+	<div class="user-<%= user.id %>">
+
+		<div id="friend_form">
+			<% if current_user.friend_with?(user) %>
+				<%= render 'shared/unfriend', user: user %>
+			<% elsif current_user.invited?(user) %>
+				<%= render 'shared/cancel', user: user %>
+			<% elsif current_user.invited_by?(user) %>
+				<%= render 'shared/confirm', user: user %>
+			<% else %>
+				<%= render 'shared/friend', user: user %>		
+			<% end %>
+		</div>
+	</div>
+<% end %>
+

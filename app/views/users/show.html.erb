@@ -1,6 +1,6 @@
 <div class="right">
 <% if user_signed_in? %>
-<%= render 'shared/follow_form' , user: @user%>
+<%= render 'shared/friend_form' , user: @user%>
 <% end %>
 </div>
 <%= image_tag @user.avatar.url(:thumb), class: 'profile' %>
@@ -8,7 +8,6 @@
 <h4><%= @user.name %></h4>
 <h5><%= "Interests: " %></h5><%= @user.interests %> 
 <h5><%= "Quotes: " %></h5><%= @user.quotes %>
-<h5><%= "Last Name: " %></h5><%= @user.last_name %>
 </span>
 <div class="row feed ">
 <% @activities.each do |activity| %>

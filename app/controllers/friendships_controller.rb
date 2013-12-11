@@ -1,83 +1,59 @@
 class FriendshipsController < ApplicationController
-  # GET /friendships
-  # GET /friendships.json
+
+  before_filter :authenticate_user!
+
   def index
-    @friendships = Friendship.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @friendships }
-    end
+    @friends = current_user.friends
+    redirect_to users_path
   end
 
-  # GET /friendships/1
-  # GET /friendships/1.json
-  def show
-    @friendship = Friendship.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @friendship }
-    end
-  end
-
-  # GET /friendships/new
-  # GET /friendships/new.json
   def new
-    @friendship = Friendship.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @friendship }
-    end
+    @users = User.all :conditions => ["id != ?", current_user.id]
+    redirect_to users_path
   end
 
-  # GET /friendships/1/edit
-  def edit
-    @friendship = Friendship.find(params[:id])
-  end
-
-  # POST /friendships
-  # POST /friendships.json
   def create
-    @friendship = Friendship.new(params[:friendship])
-
-    respond_to do |format|
-      if @friendship.save
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
-        format.json { render json: @friendship, status: :created, location: @friendship }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
-      end
+    invitee = User.find_by_id(params[:user])
+    if current_user.invite invitee
+      redirect_to users_path, :notice => "Successfully invited friend!"
+    else
+      redirect_to users_path, :notice => "Sorry! You can't invite that user!"
     end
   end
 
-  # PUT /friendships/1
-  # PUT /friendships/1.json
   def update
-    @friendship = Friendship.find(params[:id])
-
-    respond_to do |format|
-      if @friendship.update_attributes(params[:friendship])
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
-      end
+    inviter = User.find_by_id(params[:id])
+    if current_user.approve inviter
+      redirect_to users_path, :notice => "Successfully confirmed friend!"
+    else
+      redirect_to users_path, :notice => "Sorry! Could not confirm friend!"
     end
   end
 
-  # DELETE /friendships/1
-  # DELETE /friendships/1.json
+  def approve
+    inviter = User.find_by_id(params[:id])
+    if current_user.approve inviter
+      redirect_to users_path, :notice => "Successfully confirmed friend!"
+    else
+      redirect_to users_path, :notice => "Sorry! Could not confirm friend!"
+    end
+  end
+
+  def requests
+    @pending_requests = current_user.pending_invited_by
+  end
+
+  def invites
+    @pending_invites = current_user.pending_invited
+  end
+
   def destroy
-    @friendship = Friendship.find(params[:id])
-    @friendship.destroy
-
-    respond_to do |format|
-      format.html { redirect_to friendships_url }
-      format.json { head :ok }
+    user = User.find_by_id(params[:id])
+    if current_user.remove_friendship user
+      redirect_to friends_path, :notice => "Successfully removed friend!"
+    else
+      redirect_to friends_path, :notice => "Sorry, couldn't remove friend!"
     end
   end
+
 end

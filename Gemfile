@@ -9,6 +9,7 @@ gem 'devise'
 gem "socialization"
 gem "paperclip", "~> 3.0"
 gem 'public_activity'
+gem 'amistad'
 
 
 # Gems used only for assets and not required

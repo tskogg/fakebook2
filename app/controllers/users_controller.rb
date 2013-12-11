@@ -24,11 +24,11 @@ class UsersController < ApplicationController
 
   def follow
   	@user = User.find(params[:user])
-	current_user.follow!(@user)
+	current_user.invite!(@user)
   end
   def unfollow
   	@user = User.find(params[:user])
-	current_user.unfollow!(@user)
+	current_user.remove_friendship!(@user)
   end
   def like
       if params[:likeable_type] == "Post"
