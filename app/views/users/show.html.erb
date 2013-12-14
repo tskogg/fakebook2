@@ -6,11 +6,15 @@
 <%= image_tag @user.avatar.url(:thumb), class: 'profile' %>
 <span class="left">
 <h4><%= @user.name %></h4>
-<h5><%= "Interests: " %></h5><%= @user.interests %> 
-<h5><%= "Quotes: " %></h5><%= @user.quotes %>
+<div>
+<div margin-left: 10px>
+<% if current_user.friend_with?(@user) %>
+<%= render 'users/profile' %>
+<% elsif current_user == @user %>
+<%= render 'users/profile' %>
+<% else %>
+<%= "Add " %><%= @user.name %><%= " as a friend to see their full profile."%>
 </span>
-<div class="row feed ">
-<% @activities.each do |activity| %>
-    <%= render_activity(activity) %>
 <% end %>
+</div>
 </div>

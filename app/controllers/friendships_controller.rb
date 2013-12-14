@@ -22,16 +22,7 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    inviter = User.find_by_id(params[:id])
-    if current_user.approve inviter
-      redirect_to users_path, :notice => "Successfully confirmed friend!"
-    else
-      redirect_to users_path, :notice => "Sorry! Could not confirm friend!"
-    end
-  end
-
-  def approve
-    inviter = User.find_by_id(params[:id])
+    inviter = User.find_by_id(params[:user])
     if current_user.approve inviter
       redirect_to users_path, :notice => "Successfully confirmed friend!"
     else
@@ -48,11 +39,11 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    user = User.find_by_id(params[:id])
-    if current_user.remove_friendship user
-      redirect_to friends_path, :notice => "Successfully removed friend!"
+    dluser = User.find_by_id(params[:user])
+    if current_user.remove_friendship dluser
+      redirect_to user_path(params[:user]), :notice => "Successfully removed friend!"
     else
-      redirect_to friends_path, :notice => "Sorry, couldn't remove friend!"
+      redirect_to user_path(params[:user]), :notice => "Sorry, couldn't remove friend!"
     end
   end
 

@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
+    if params[:commit]
+       @users = User.where("name = ?", params[:q])
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
