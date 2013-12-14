@@ -1,0 +1,10 @@
+Hello. We did the Facebook clone, but don't have quite everything working.
+
+You can add friends, etc., only from that friend's profile page. For some reason we would get a missing route error adding it elsewhere.
+Adding, confirming, and removing friends all works when done from that page.
+
+Likewise, we can post a status (comment on our own Wall) but not on other user's Walls.
+
+There's not really a Newsfeed; when you log in, you can create a post (linked to by clicking "Fakebook" in upper right corner) but you only see posts when viewing a profile. This is probably related to the above.
+
+We did add likes and image support, which works locally if not on Heroku.
